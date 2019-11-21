@@ -38,6 +38,42 @@ export default class Session {
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" onclick="app.sessionsController.removeSession('${this.id}')">Delete</button>
+      </form>
+    </div>
+    `;
+  }
+  get Template2() {
+    return `
+    <div class="col-5 mt-3 p-3 border rounded bg-info">
+      <h1 class="text-center border-bottom">${this.name}</h1>
+      <dl class="ml-5">
+      </dl>
+      <form onsubmit="app.sessionsController.addSpeaker(event, '${this.id}')">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" />
+        </div>
+        <div class="form-group">
+          <label for="topic">Topic</label>
+          <input
+            type="text"
+            class="form-control"
+            id="topic"
+            placeholder="Enter topic"
+          />
+        </div>
+        <div class="form-group">
+          <label for="time">Time</label>
+          <input
+            type="time"
+            class="form-control"
+            id="time"
+            placeholder="Enter time"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" onclick="app.sessionsController.removeSession('${this.id}')">Delete</button>
       </form>
     </div>
     `;
@@ -49,5 +85,12 @@ export default class Session {
       template += speaker.Template;
     });
     return template;
+  }
+  get sessionTemplate() {
+    let template = '';
+    this.name.forEach(name => {
+      template += name.Template2;
+    });
+    return template
   }
 }
